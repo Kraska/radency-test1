@@ -1,5 +1,6 @@
-// import { Note } from '../entities/Note.js'
-import { STORE } from '../storage/Storage.js'
+// import { Note } from '../entities/Note.js';
+import { STORE } from '../storage/Storage.js';
+import { AddNoteModalLayout } from './modal/AddNoteModalLayout.js';
 
 export class NotesLayout {
 
@@ -12,6 +13,8 @@ export class NotesLayout {
 
     getContent = () => {
         const tbody = this.getTbody();
+        const addNoteModalLayouut = new AddNoteModalLayout();
+
         return `
         <table class="table border-white table-hover">
         <thead class="table-secondary">
@@ -29,7 +32,7 @@ export class NotesLayout {
         </thead>
         <tbody id="notesList" class="border-white">${tbody}</tbody>
         </table>
-        <button type="button" class="btn btn-secondary float-end">Create Note</button>`;
+        ${addNoteModalLayouut.getContent()}`;
     }
 
     getTbody = () => {
@@ -40,7 +43,7 @@ export class NotesLayout {
 
     noteToRow = (note) => {
         // console.log(note);
-        
+
         let tr = `<tr class="table-primary border-white" style="border-width:6px">
             <th scope="row">Icon</th>
             <td>${note.title}</td>
