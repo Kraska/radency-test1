@@ -1,12 +1,13 @@
 import { AddNoteModalLayout } from "../layout/modal/AddNoteModalLayout.js";
 import { CATEGORY_SERVICE } from "../services/CategoryService.js";
 import { NOTE_SERVICE } from "../services/NoteService.js";
+import { AbstractComponent } from "./AbstractComponent.js";
 
 
-export class AddNoteComponent {
+export class AddNoteComponent extends AbstractComponent {
 
     constructor(selector) {
-        this.selector = selector;
+        super(selector)
 
         this.titleInputId = 'addNoteTitle';
         this.contentInputId = 'addNoteContent';
@@ -22,17 +23,12 @@ export class AddNoteComponent {
         );
     }
 
-    render = () => {
-        this.update();
-        this.onRender();
-    }
-
-    update = () => {
-        document.querySelector(this.selector).innerHTML = this.layout.getContent();
-    }
-
     onRender = () => {
         document.querySelector(`#${this.saveButtonId}`).onclick = this.onSave;
+    }
+
+    getContent = () => {
+        return this.layout.getContent();
     }
 
     onSave = () => {
