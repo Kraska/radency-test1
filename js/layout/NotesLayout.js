@@ -1,6 +1,5 @@
 import { CATEGORY_SERVICE } from '../services/CategoryService.js';
 import { NOTE_SERVICE } from '../services/NoteService.js';
-import { EVENT_MANAGER } from '../services/EventManager.js';
 import { AddNoteModalLayout } from './modal/AddNoteModalLayout.js';
 
 export class NotesLayout {
@@ -8,7 +7,6 @@ export class NotesLayout {
     constructor(iconsStyle = `style="color: dimgrey;"`, headIconsStyle = `style="color: white;"`) {
         this.iconsStyle = iconsStyle;
         this.headIconsStyle = headIconsStyle;
-        EVENT_MANAGER.subscribe(NOTE_SERVICE.EVENTS.CREATED, () => {console.log("Update NotesLayout!")})
     }
 
     getContent = () => {
@@ -31,18 +29,15 @@ export class NotesLayout {
             </tr>
         </thead>
         <tbody id="notesList" class="border-white">${tbody}</tbody>
-        </table>
-        ${addNoteModalLayouut.getContent()}`;
+        </table>`;
     }
 
     getTbody = () => {
         const tbody = NOTE_SERVICE.getNotes().map(this.noteToRow).join('');
-        //console.log(tbody);
         return tbody;
     }
 
     noteToRow = (note) => {
-        // console.log(note);
 
         let tr = `<tr class="table-primary border-white" style="border-width:6px">
             <th scope="row">Icon</th>

@@ -1,29 +1,23 @@
 import { ModalLayout } from './ModalLayout.js';
-import { NOTE_SERVICE } from '../../services/NoteService.js';
 
 export class AddNoteModalLayout {
 
-    constructor(categories) {
+    constructor(categories, titleInputId, contentInputId, categoryInputId, saveButtonId) {
         this.categories = categories;
 
-        this.titleInputId = 'addNoteTitle';
-        this.contentInputId = 'addNoteContent';
-        this.categoryInputId = 'addNoteCategory';
+        this.titleInputId = titleInputId;
+        this.contentInputId = contentInputId;
+        this.categoryInputId = categoryInputId;
+        this.saveButtonId = saveButtonId;
     }
 
     getContent = () => {
         const modelName = "addNoteModal";
-        const addNoteModal = new ModalLayout(modelName, "Add Note", this.getBody());
-
-        const onSave = () => {
-            console.log('onSave!');
-        }
 
         return `<div>
-            ${addNoteModal.getContent()}
+            ${new ModalLayout(modelName, "Add Note", this.getBody()).getContent()}
             <button 
                 type="button" 
-                onclick="${onSave}"
                 class="btn btn-secondary float-end" 
                 data-bs-toggle="modal" 
                 data-bs-target="#${modelName}">
@@ -34,9 +28,6 @@ export class AddNoteModalLayout {
 
     getBody = () => {
 
-        const onSaveFuncName = 'AddNoteModalLayoutOnSave';
-        window[onSaveFuncName] = this.onSave;
-    
         return `
             <div class="mb-3">
                 <label for="${this.titleInputId}" class="form-label">Title</label>
@@ -51,7 +42,7 @@ export class AddNoteModalLayout {
             </div>
             <div class="mb-4">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cansel</button>
-                <button type="button" onclick="${onSaveFuncName}()" class="btn btn-primary">Save</button>
+                <button type="button" id="${this.saveButtonId}" class="btn btn-primary">Save</button>
             </div>
             `;
     }
@@ -64,13 +55,4 @@ export class AddNoteModalLayout {
                 ${this.categories.map(catToOption).join("\n")}
             </select>`;
     }
-
-    onSave = (e) => {
-        let title = document.querySelector(`#${this.titleInputId}`).value;
-        let category = document.querySelector(`#${this.categoryInputId}`).value;
-        let content = document.querySelector(`#${this.contentInputId}`).value;
-
-        NOTE_SERVICE.addNewNote(title, category, content);        
-    }
-
 }

@@ -10,6 +10,10 @@ export class CategoryService {
     newId = () => {
         return (Math.random() + 1).toString(36).substring(7);
     }
+
+    getCategory = (id) => {
+        return STORE.categories[id];
+    }
 }
 
 export const CATEGORY_SERVICE = new CategoryService();

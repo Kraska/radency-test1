@@ -1,6 +1,7 @@
 import { STORE } from '../storage/Storage.js';
 import { EVENT_MANAGER } from './EventManager.js';
-import { Note } from '../entities/Note.js'
+import { CATEGORY_SERVICE } from './CategoryService.js';
+import { Note } from '../entities/Note.js';
 
 
 class NoteService {
@@ -14,13 +15,14 @@ class NoteService {
     }
     
     getNotes = () => {
-        console.log('NoteService.EVENTS', NoteService.EVENTS);
         return Object.values(STORE.notes);
     }
 
-    addNewNote = (title, category, content) => {
+    addNewNote = (title, categoryId, content) => {
+
         const id = this.newId();
-        STORE.notes[id] = new Note(id, title,category, content, '');
+        const category = CATEGORY_SERVICE.getCategory(categoryId);
+        STORE.notes[id] = new Note(id, title, category, content, '');
         
         EVENT_MANAGER.notify(this.EVENTS.CREATED);
     }

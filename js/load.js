@@ -1,3 +1,12 @@
-import { BodyLayout } from './layout/BodyLayout.js';
+import { BodyComponent } from './components/BodyComponent.js';
+import { NotesComponent } from './components/NotesComponent.js';
+import { AddNoteComponent } from './components/AddNoteComponent.js';
 
-document.querySelector("#content").innerHTML = new BodyLayout().getContent();
+
+const notesDivId = "Notes";
+const summaryDivId = "Summary";
+const addNodeModalDivId = "AddNodeModal";
+
+new BodyComponent("#content", notesDivId, summaryDivId, addNodeModalDivId).render();
+new NotesComponent(`#${notesDivId}`).render();
+new AddNoteComponent(`#${addNodeModalDivId}`).render();
