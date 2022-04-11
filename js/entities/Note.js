@@ -1,6 +1,6 @@
 export class Note {
 
-    constructor(id, title, created, category, content, dates = [], isActive = true) {
+    constructor(id, title, category, content, created, dates = [], isActive = true) {
         this.id = id;
         this.title = title;
         this.created = created;
