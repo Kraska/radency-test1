@@ -1,4 +1,4 @@
-import { NotesLayout } from "../layout/NotesLayout.js";
+import { NotesLayout } from "./NotesLayout.js";
 import { CATEGORY_SERVICE } from "../services/CategoryService.js";
 import { EVENT_MANAGER } from '../services/EventManager.js';
 import { NOTE_SERVICE } from "../services/NoteService.js";

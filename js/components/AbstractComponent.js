@@ -11,6 +11,7 @@ export class AbstractComponent {
     }
 
     update = () => {
+        console.log('this.selector', this.selector);
         document.querySelector(this.selector).innerHTML = this.getContent();
     }
 

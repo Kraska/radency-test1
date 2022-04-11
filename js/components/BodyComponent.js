@@ -1,24 +1,17 @@
 
-export class BodyComponent {
+import { AbstractComponent } from "./AbstractComponent.js";
+
+export class BodyComponent extends AbstractComponent {
 
     constructor(selector, notesDivId, summaryDivId, addNodeModalDivId) {
-        this.selector = selector;
+        super(selector);
 
         this.notesDivId = notesDivId;
         this.summaryDivId = summaryDivId;
         this.addNodeModalDivId = addNodeModalDivId;
     }
 
-    render = () => {
-        this.update();
-    }
-
-    update = () => {
-        document.querySelector(this.selector).innerHTML = this.getContent();
-    }
-
-    getContent() {
-
+    getContent = () => {
         return `
         <header>
             <div class="container"></div>

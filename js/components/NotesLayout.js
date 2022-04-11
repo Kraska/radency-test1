@@ -1,6 +1,6 @@
 import { CATEGORY_SERVICE } from '../services/CategoryService.js';
 import { NOTE_SERVICE } from '../services/NoteService.js';
-import { AddNoteModalLayout } from './modal/AddNoteModalLayout.js';
+import { AddNoteModalLayout } from './AddNoteModalLayout.js';
 
 export class NotesLayout {
 

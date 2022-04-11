@@ -1,4 +1,4 @@
-import { AddNoteModalLayout } from "../layout/modal/AddNoteModalLayout.js";
+import { AddNoteModalLayout } from "./AddNoteModalLayout.js";
 import { CATEGORY_SERVICE } from "../services/CategoryService.js";
 import { NOTE_SERVICE } from "../services/NoteService.js";
 import { AbstractComponent } from "./AbstractComponent.js";
