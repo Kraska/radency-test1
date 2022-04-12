@@ -19,12 +19,7 @@ export class AbstractModalLayout {
                   <div class="modal-footer">${this.getFooter()}</div>
                 </div>
             </div>        
-        </div>
-        ${this.getOpenButton()}`;
-    }
-
-    getOpenButton = () => {
-        throw new TypeError("Method 'getOpenButton' needs to implement!");
+        </div>`;
     }
 
     getName = () => {

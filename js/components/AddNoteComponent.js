@@ -28,7 +28,15 @@ export class AddNoteComponent extends AbstractComponent {
     }
 
     getContent = () => {
-        return this.layout.getContent();
+        return `
+            ${this.layout.getContent()} 
+            <button 
+                type="button" 
+                class="btn btn-secondary float-end" 
+                data-bs-toggle="modal" 
+                data-bs-target="#${this.layout.getName()}">
+                    Create Note3
+            </button>`;
     }
 
     onSave = () => {

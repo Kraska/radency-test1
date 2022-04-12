@@ -40,7 +40,9 @@ export class NotesLayout {
             <td>${note.category.title}</td>
             <td>${note.content}</td>
             <td>dates</td>
-            <td><i class="bi bi-pencil-fill" ${this.iconsStyle}></i></td>
+            <td data-bs-toggle="modal" data-bs-target="#editNoteModal">
+                <i class="bi bi-pencil-fill" ${this.iconsStyle}></i>
+            </td>
             <td><i class="bi bi-arrow-down-square-fill" ${this.iconsStyle}></i></td>
             <td><i class="bi bi-trash-fill" ${this.iconsStyle}></i></td>
         </tr>`;

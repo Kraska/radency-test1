@@ -25,16 +25,6 @@ export class AddNoteModalLayout extends AbstractModalLayout {
         return `<button type="button" class="btn btn-primary">Ok</button>`;
     }
 
-    getOpenButton = () => {
-        return `<button 
-            type="button" 
-            class="btn btn-secondary float-end" 
-            data-bs-toggle="modal" 
-            data-bs-target="#${this.getName()}">
-                Create Note
-        </button>`;
-    }
-
     getBody = () => {
         return `
             <div class="mb-3">
