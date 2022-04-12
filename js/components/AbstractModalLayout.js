@@ -1,6 +1,10 @@
 export class AbstractModalLayout {
 
-    constructor() {
+    constructor(id, title) {
+
+        this.id = id;
+        this.title = title;
+
         if (new.target === AbstractModalLayout) {
             throw new TypeError("Cannot construct AbstractModalLayout instances directly");
         }
@@ -8,11 +12,11 @@ export class AbstractModalLayout {
 
     getContent = () => {
         return `<!-- Modal -->
-        <div class="modal fade" id="${this.getName()}" aria-labelledby="${this.getName()}Label" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="${this.id}" aria-labelledby="${this.id}Label" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="${this.getName()}Label">${this.getTitle()}</h5>
+                    <h5 class="modal-title" id="${this.id}Label">${this.id}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>        
                   </div>
                   <div class="modal-body">${this.getBody()}</div>
@@ -20,14 +24,6 @@ export class AbstractModalLayout {
                 </div>
             </div>        
         </div>`;
-    }
-
-    getName = () => {
-        throw new TypeError("Method 'getName' needs to implement!");
-    }
-
-    getTitle = () => {
-        throw new TypeError("Method 'getTitle' needs to implement!");
     }
 
     getBody = () => {
