@@ -1,8 +1,10 @@
-import { ModalLayout } from './ModalLayout.js';
+import { AbstractModalLayout } from './AbstractModalLayout.js';
 
-export class AddNoteModalLayout {
+export class AddNoteModalLayout extends AbstractModalLayout {
 
     constructor(categories, titleInputId, contentInputId, categoryInputId, saveButtonId) {
+        super();
+        
         this.categories = categories;
 
         this.titleInputId = titleInputId;
@@ -10,24 +12,30 @@ export class AddNoteModalLayout {
         this.categoryInputId = categoryInputId;
         this.saveButtonId = saveButtonId;
     }
+    
+    getName = () => {
+        return 'addNoteModal';
+    }
 
-    getContent = () => {
-        const modelName = "addNoteModal";
+    getTitle = () => {
+        return "Creating new Note";
+    }
+    
+    getOkButton = () => {
+        return `<button type="button" class="btn btn-primary">Ok</button>`;
+    }
 
-        return `<div>
-            ${new ModalLayout(modelName, "Add Note", this.getBody()).getContent()}
-            <button 
-                type="button" 
-                class="btn btn-secondary float-end" 
-                data-bs-toggle="modal" 
-                data-bs-target="#${modelName}">
-                    Create Note
-            </button>
-        </div>`;
+    getOpenButton = () => {
+        return `<button 
+            type="button" 
+            class="btn btn-secondary float-end" 
+            data-bs-toggle="modal" 
+            data-bs-target="#${this.getName()}">
+                Create Note
+        </button>`;
     }
 
     getBody = () => {
-
         return `
             <div class="mb-3">
                 <label for="${this.titleInputId}" class="form-label">Title</label>
@@ -43,8 +51,7 @@ export class AddNoteModalLayout {
             <div class="mb-4">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cansel</button>
                 <button type="button" id="${this.saveButtonId}" class="btn btn-primary">Save</button>
-            </div>
-            `;
+            </div>`;
     }
 
     getCategoriesSelect = () => {

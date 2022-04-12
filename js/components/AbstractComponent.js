@@ -1,4 +1,3 @@
-
 export class AbstractComponent {
 
     constructor(selector) {
@@ -11,14 +10,12 @@ export class AbstractComponent {
     }
 
     update = () => {
-        console.log('this.selector', this.selector);
         document.querySelector(this.selector).innerHTML = this.getContent();
     }
 
     onRender = () => {}
 
-    // todo abstract
     getContent = () => {
-        return '';
+        throw new TypeError("Method 'getContent' needs to implement!");
     }
 }

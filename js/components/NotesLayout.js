@@ -1,6 +1,4 @@
-import { CATEGORY_SERVICE } from '../services/CategoryService.js';
 import { NOTE_SERVICE } from '../services/NoteService.js';
-import { AddNoteModalLayout } from './AddNoteModalLayout.js';
 
 export class NotesLayout {
 
@@ -10,9 +8,6 @@ export class NotesLayout {
     }
 
     getContent = () => {
-        const tbody = this.getTbody();
-        const addNoteModalLayouut = new AddNoteModalLayout(CATEGORY_SERVICE.getCategories());
-
         return `
         <table class="table border-white table-hover">
         <thead class="table-secondary">
@@ -28,13 +23,12 @@ export class NotesLayout {
             <th scope="col"><i class="bi bi-trash-fill" ${this.headIconsStyle}></i></th>
             </tr>
         </thead>
-        <tbody id="notesList" class="border-white">${tbody}</tbody>
+        <tbody id="notesList" class="border-white">${this.getTbody()}</tbody>
         </table>`;
     }
 
     getTbody = () => {
-        const tbody = NOTE_SERVICE.getNotes().map(this.noteToRow).join('');
-        return tbody;
+        return NOTE_SERVICE.getNotes().map(this.noteToRow).join('');
     }
 
     noteToRow = (note) => {
