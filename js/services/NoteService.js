@@ -20,6 +20,10 @@ class NoteService {
         return Object.values(STORE.notes);
     }
 
+    getActiveNotes = () => {
+        return Object.values(STORE.notes).filter(note => note.isActive);
+    }
+
     addNewNote = (title, categoryId, content) => {
 
         const id = this.newId();
@@ -39,6 +43,11 @@ class NoteService {
     removeNote = (id) => {
         delete STORE.notes[id];
         EVENT_MANAGER.notify(this.EVENTS.REMOVED);
+    }
+
+    archiveNote = (id) => {
+        STORE.notes[id].archive();
+        EVENT_MANAGER.notify(this.EVENTS.ARCHIVED);
     }
 
     newId = () => {

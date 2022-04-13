@@ -10,4 +10,7 @@ export class Note {
         this.isActive = isActive;
     }
 
+    archive = () => {
+        this.isActive = false;
+    }
 }

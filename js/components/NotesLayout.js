@@ -3,11 +3,14 @@ import { NOTE_SERVICE } from '../services/NoteService.js';
 export class NotesLayout {
 
     constructor(
+        notes,
         editNoteComponents,
         removeNoteComponents,
+        archiveNoteComponents,
         iconsStyle = `style="color: dimgrey;"`, 
         headIconsStyle = `style="color: white;"`
     ) {
+        this.notes = notes;
         this.iconsStyle = iconsStyle;
         this.headIconsStyle = headIconsStyle;
 
@@ -16,6 +19,10 @@ export class NotesLayout {
                 .join("\n");      
 
         this.removeNoteModals = removeNoteComponents
+                .map(component => component.getContent())
+                .join("\n");    
+
+        this.archiveNoteModals = archiveNoteComponents
                 .map(component => component.getContent())
                 .join("\n");      
     }
@@ -40,11 +47,12 @@ export class NotesLayout {
         </table>
         ${this.editNoteModals}
         ${this.removeNoteModals}
+        ${this.archiveNoteModals}
         `;
     }
 
     getTbody = () => {
-        return NOTE_SERVICE.getNotes().map(this.noteToRow).join('');
+        return this.notes.map(this.noteToRow).join('');
     }
 
     noteToRow = (note) => {
@@ -58,7 +66,7 @@ export class NotesLayout {
             <td id="editNote_${note.id}" data-bs-toggle="modal" data-bs-target="#editNoteModal_${note.id}">
                 <i class="bi bi-pencil-fill" ${this.iconsStyle}></i>
             </td>
-            <td>
+            <td data-bs-toggle="modal" data-bs-target="#archiveNoteModal_${note.id}">
                 <i class="bi bi-arrow-down-square-fill" ${this.iconsStyle}></i>
             </td>
             <td data-bs-toggle="modal" data-bs-target="#removeNoteModal_${note.id}">

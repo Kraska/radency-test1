@@ -24,7 +24,7 @@ export class AddNoteComponent extends AbstractComponent {
         );
     }
 
-    onUpdate = () => {
+    afterUpdate = () => {
         document.querySelector(`#${this.layout.saveButtonId}`).onclick = this.onSave;
     }
 

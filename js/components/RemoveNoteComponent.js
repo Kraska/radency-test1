@@ -20,7 +20,7 @@ export class RemoveNoteComponent extends AbstractComponent {
         );
     }
 
-    onUpdate = () => {
+    afterUpdate = () => {
         document.querySelector(`#${this.removeButtonId}`).onclick = this.onRemove;
     }
 

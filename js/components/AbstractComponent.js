@@ -9,11 +9,14 @@ export class AbstractComponent {
     }
 
     update = () => {
+        this.beforeUpdate();
         document.querySelector(this.selector).innerHTML = this.getContent();
-        this.onUpdate();
+        this.afterUpdate();
     }
 
-    onUpdate = () => {}
+    beforeUpdate = () => {}
+
+    afterUpdate = () => {}
 
     getContent = () => {
         throw new TypeError("Method 'getContent' needs to implement!");
