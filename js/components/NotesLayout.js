@@ -1,5 +1,3 @@
-import { NOTE_SERVICE } from '../services/NoteService.js';
-
 export class NotesLayout {
 
     constructor(

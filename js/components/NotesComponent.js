@@ -5,16 +5,17 @@ import { AbstractComponent } from "./AbstractComponent.js";
 import { EditNoteComponent } from "./EditNoteComponent.js";
 import { RemoveNoteComponent } from "./RemoveNoteComponent.js";
 import { ArchiveNoteComponent } from "./ArchiveNoteComponent.js";
+import { EVENTS } from "../services/events.js";
 
 export class NotesComponent extends AbstractComponent {
 
     constructor(selector) {
         super(selector)
 
-        EVENT_MANAGER.subscribe(NOTE_SERVICE.EVENTS.CREATED, this.update);
-        EVENT_MANAGER.subscribe(NOTE_SERVICE.EVENTS.UPDATED, () => this.update());
-        EVENT_MANAGER.subscribe(NOTE_SERVICE.EVENTS.REMOVED, () => this.update());
-        EVENT_MANAGER.subscribe(NOTE_SERVICE.EVENTS.ARCHIVED, () => this.update());
+        EVENT_MANAGER.subscribe(EVENTS.NoteService.CREATED, this.update);
+        EVENT_MANAGER.subscribe(EVENTS.NoteService.UPDATED, this.update);
+        EVENT_MANAGER.subscribe(EVENTS.NoteService.REMOVED, this.update);
+        EVENT_MANAGER.subscribe(EVENTS.NoteService.ARCHIVED, this.update);
     }
 
     getContent = () => {

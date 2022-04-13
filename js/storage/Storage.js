@@ -11,9 +11,9 @@ class Storage {
     init() {
 
         this.categories = {
-            '1': new Category(1, 'Task'),
-            '2': new Category(2, 'Random Thought'), 
-            '3': new Category(3, 'Idea') 
+            '1': new Category(1, 'Task', 6, 0),
+            '2': new Category(2, 'Random Thought', 1, 0), 
+            '3': new Category(3, 'Idea', 0, 0) 
         }; 
 
         this.notes = {

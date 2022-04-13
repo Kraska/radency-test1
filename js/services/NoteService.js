@@ -2,20 +2,12 @@ import { STORE } from '../storage/Storage.js';
 import { EVENT_MANAGER } from './EventManager.js';
 import { CATEGORY_SERVICE } from './CategoryService.js';
 import { Note } from '../entities/Note.js';
+import { EVENTS } from './events.js';
+
 
 
 class NoteService {
 
-    constructor() {
-        this.EVENTS = {
-            CREATED: "NoteService.CREATED",
-            UPDATED: "NoteService.UPDATED",
-            REMOVED: "NoteService.REMOVED",
-            ARCHIVED: "NoteService.ARCHIVED",
-            ACTIVATED: "NoteService.ACTIVATED",
-         };
-    }
-    
     getNotes = () => {
         return Object.values(STORE.notes);
     }
@@ -30,24 +22,30 @@ class NoteService {
         const category = CATEGORY_SERVICE.getCategory(categoryId);
         STORE.notes[id] = new Note(id, title, category, content, '');
         
-        EVENT_MANAGER.notify(this.EVENTS.CREATED);
+        EVENT_MANAGER.notify(EVENTS.NoteService.CREATED, { note: STORE.notes[id] });
     }
 
     updateNote = (id, title, categoryId, content) => {
         //console.log('updateNote');
+        const oldNote = STORE.notes[id];
         const category = CATEGORY_SERVICE.getCategory(categoryId);
         STORE.notes[id] = new Note(id, title, category, content, '');
-        EVENT_MANAGER.notify(this.EVENTS.UPDATED);
+
+        EVENT_MANAGER.notify(EVENTS.NoteService.UPDATED, { oldNote, newNote: STORE.notes[id] });
     }
 
     removeNote = (id) => {
+        const note = STORE.notes[id];
         delete STORE.notes[id];
-        EVENT_MANAGER.notify(this.EVENTS.REMOVED);
+
+        EVENT_MANAGER.notify(EVENTS.NoteService.REMOVED, { note });
     }
 
     archiveNote = (id) => {
+        const note = STORE.notes[id];
         STORE.notes[id].archive();
-        EVENT_MANAGER.notify(this.EVENTS.ARCHIVED);
+        
+        EVENT_MANAGER.notify(EVENTS.NoteService.ARCHIVED, { note });
     }
 
     newId = () => {
