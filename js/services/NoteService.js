@@ -10,6 +10,7 @@ class NoteService {
         this.EVENTS = {
             CREATED: "NoteService.CREATED",
             UPDATED: "NoteService.UPDATED",
+            REMOVED: "NoteService.REMOVED",
             ARCHIVED: "NoteService.ARCHIVED",
             ACTIVATED: "NoteService.ACTIVATED",
          };
@@ -33,6 +34,11 @@ class NoteService {
         const category = CATEGORY_SERVICE.getCategory(categoryId);
         STORE.notes[id] = new Note(id, title, category, content, '');
         EVENT_MANAGER.notify(this.EVENTS.UPDATED);
+    }
+
+    removeNote = (id) => {
+        delete STORE.notes[id];
+        EVENT_MANAGER.notify(this.EVENTS.REMOVED);
     }
 
     newId = () => {

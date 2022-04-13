@@ -4,14 +4,19 @@ export class NotesLayout {
 
     constructor(
         editNoteComponents,
+        removeNoteComponents,
         iconsStyle = `style="color: dimgrey;"`, 
         headIconsStyle = `style="color: white;"`
     ) {
         this.iconsStyle = iconsStyle;
         this.headIconsStyle = headIconsStyle;
 
-        this.modals = editNoteComponents
-                .map(enComponent => enComponent.getContent())
+        this.editNoteModals = editNoteComponents
+                .map(component => component.getContent())
+                .join("\n");      
+
+        this.removeNoteModals = removeNoteComponents
+                .map(component => component.getContent())
                 .join("\n");      
     }
 
@@ -33,7 +38,9 @@ export class NotesLayout {
         </thead>
         <tbody id="notesList" class="border-white">${this.getTbody()}</tbody>
         </table>
-        ${this.modals}`;
+        ${this.editNoteModals}
+        ${this.removeNoteModals}
+        `;
     }
 
     getTbody = () => {
@@ -51,8 +58,12 @@ export class NotesLayout {
             <td id="editNote_${note.id}" data-bs-toggle="modal" data-bs-target="#editNoteModal_${note.id}">
                 <i class="bi bi-pencil-fill" ${this.iconsStyle}></i>
             </td>
-            <td><i class="bi bi-arrow-down-square-fill" ${this.iconsStyle}></i></td>
-            <td><i class="bi bi-trash-fill" ${this.iconsStyle}></i></td>
+            <td>
+                <i class="bi bi-arrow-down-square-fill" ${this.iconsStyle}></i>
+            </td>
+            <td data-bs-toggle="modal" data-bs-target="#removeNoteModal_${note.id}">
+                <i class="bi bi-trash-fill" ${this.iconsStyle}></i>
+            </td>
         </tr>`;
 
         return tr;
