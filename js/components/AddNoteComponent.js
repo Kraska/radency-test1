@@ -9,8 +9,10 @@ export class AddNoteComponent extends AbstractComponent {
     constructor(selector) {
         super(selector)
 
+        this.modalId = 'addNoteModal';
+
         this.layout = new AddEditNoteModalLayout(
-            'addNoteModal', 
+            this.modalId, 
             'Creating new Note',
             {
                 titleId: 'addNoteTitle', 
@@ -42,6 +44,8 @@ export class AddNoteComponent extends AbstractComponent {
         let title = document.querySelector(`#${this.layout.titleId}`).value;
         let category = document.querySelector(`#${this.layout.categoryId}`).value;
         let content = document.querySelector(`#${this.layout.contentId}`).value;
+        
+        bootstrap.Modal.getInstance(document.getElementById(this.modalId)).hide();
 
         NOTE_SERVICE.addNewNote(title, category, content);  
     }
