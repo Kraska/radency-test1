@@ -9,7 +9,7 @@ export class AddEditNoteModalLayout extends AbstractModalLayout {
             categories, 
             note = { title: '', category: { id: '', title: ''}, content: '' }
         ) {
-
+            
         super(id, title);
         
         this.categories = categories;
@@ -43,12 +43,7 @@ export class AddEditNoteModalLayout extends AbstractModalLayout {
             </div>
             <div class="mb-3">
                 <label for="${this.contentId}" class="form-label">Content</label>
-                <textarea 
-                    class="form-control" 
-                    id="${this.contentId}" 
-                    value="${this.note.content}"
-                    rows="3">
-                </textarea>
+                <textarea class="form-control" id="${this.contentId}" rows="3">${this.note.content}</textarea>
             </div>`;
     }
 

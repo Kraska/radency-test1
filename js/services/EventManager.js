@@ -11,7 +11,7 @@ class EventManager {
     } 
 
     notify = (eventType, data) => {
-        // todo может, не нужно последовательно?
+        //console.log(eventType);
         (this.listeners[eventType] || []).forEach(listener => listener(data))
     }
 }

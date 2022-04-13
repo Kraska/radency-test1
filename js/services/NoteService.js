@@ -9,8 +9,9 @@ class NoteService {
     constructor() {
         this.EVENTS = {
             CREATED: "NoteService.CREATED",
+            UPDATED: "NoteService.UPDATED",
             ARCHIVED: "NoteService.ARCHIVED",
-            ACTIVATED: "NoteService.ACTIVATED"
+            ACTIVATED: "NoteService.ACTIVATED",
          };
     }
     
@@ -25,6 +26,13 @@ class NoteService {
         STORE.notes[id] = new Note(id, title, category, content, '');
         
         EVENT_MANAGER.notify(this.EVENTS.CREATED);
+    }
+
+    updateNote = (id, title, categoryId, content) => {
+        //console.log('updateNote');
+        const category = CATEGORY_SERVICE.getCategory(categoryId);
+        STORE.notes[id] = new Note(id, title, category, content, '');
+        EVENT_MANAGER.notify(this.EVENTS.UPDATED);
     }
 
     newId = () => {

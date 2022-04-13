@@ -4,21 +4,26 @@ import { NOTE_SERVICE } from "../services/NoteService.js";
 import { AbstractComponent } from "./AbstractComponent.js";
 
 
-export class AddNoteComponent extends AbstractComponent {
+export class EditNoteComponent extends AbstractComponent {
 
-    constructor(selector) {
+    constructor(selector, note) {
         super(selector)
 
+        this.note = note;
+
+        this.modalId = `editNoteModal_${note.id}`;
+
         this.layout = new AddEditNoteModalLayout(
-            'addNoteModal', 
-            'Creating new Note',
+            this.modalId, 
+            'Updating Note',
             {
-                titleId: 'addNoteTitle', 
-                contentId: 'addNoteContent', 
-                categoryId: 'addNoteCategory', 
-                saveButtonId: 'addNoteSaveButton'
+                titleId: `editNoteTitle_${note.id}`, 
+                contentId: `editNoteContent_${note.id}`, 
+                categoryId: `editNoteCategory_${note.id}`, 
+                saveButtonId: `editNoteSaveButton_${note.id}`
             },
-            CATEGORY_SERVICE.getCategories()
+            CATEGORY_SERVICE.getCategories(),
+            note
         );
     }
 
@@ -27,22 +32,17 @@ export class AddNoteComponent extends AbstractComponent {
     }
 
     getContent = () => {
-        return `
-            ${this.layout.getContent()} 
-            <button 
-                type="button" 
-                class="btn btn-secondary float-end" 
-                data-bs-toggle="modal" 
-                data-bs-target="#${this.layout.id}">
-                    Create Note3
-            </button>`;
+        return this.layout.getContent();
     }
 
     onSave = () => {
+
         let title = document.querySelector(`#${this.layout.titleId}`).value;
         let category = document.querySelector(`#${this.layout.categoryId}`).value;
         let content = document.querySelector(`#${this.layout.contentId}`).value;
 
-        NOTE_SERVICE.addNewNote(title, category, content);  
+        bootstrap.Modal.getInstance(document.getElementById(this.modalId)).hide();
+
+        NOTE_SERVICE.updateNote(this.note.id, title, category, content);  
     }
 }
