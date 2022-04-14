@@ -3,9 +3,10 @@ import { EVENTS } from "../services/events.js";
 
 export class Category {
 
-    constructor(id, title, activeCounter = 0, archivedCounter = 0) {
+    constructor(id, title, iconName, activeCounter = 0, archivedCounter = 0) {
         this.id = id;
         this.title = title;
+        this.iconName = iconName;
         this.activeCounter = activeCounter;
         this.archivedCounter = archivedCounter;
     }

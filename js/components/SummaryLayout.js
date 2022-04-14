@@ -1,23 +1,24 @@
 export class SummaryLayout {
 
-    constructor(categories, iconsStyle = `style="color: dimgrey;"`) {
+    constructor(categories) {
         this.categories = categories;
-        this.iconsStyle = iconsStyle;   
     }
 
     getContent = () => {
         return `
-        <table class="table border-white table-hover">
-        <thead class="table-secondary">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Note Category</th>
-                <th scope="col">Active</th>
-                <th scope="col">Archived</th>
-            </tr>
-        </thead>
-        <tbody class="border-white">${this.getTbody()}</tbody>
-        </table>`;
+        <div class="">
+            <table class="table table-hover TableList">
+            <thead class="table-secondary">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Note Category</th>
+                    <th scope="col">Active</th>
+                    <th scope="col">Archived</th>
+                </tr>
+            </thead>
+            <tbody class="border-white">${this.getTbody()}</tbody>
+            </table>
+        </div>`;
     }
 
     getTbody = () => {
@@ -25,8 +26,9 @@ export class SummaryLayout {
     }
 
     categoryToRow = (category) => {
-        const tr = `<tr class="table-primary border-white" style="border-width:6px">
-            <th scope="row">Icon</th>
+        const icon = `<i class="bi ${category.iconName}"></i>`
+        const tr = `<tr>
+            <th scope="row">${icon}</th>
             <td>${category.title}</td>
             <td>${category.activeCounter}</td>
             <td>${category.archivedCounter}</td>

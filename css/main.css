@@ -1,0 +1,39 @@
+div.container {
+    margin-top: 20px;
+}
+
+#Summary {
+    margin-top: 150px;
+}
+
+.TableList thead th {
+    background-color: #999999;
+    color: white;
+}
+
+.TableList tbody tr {
+    background-color: #E8EAF4;
+    border-color: white;
+    border-width: 6px;
+    color: dimgray;
+    /* color: #848484; */
+}
+
+.TableList tbody th {
+    font-weight: normal;
+    color: #212529;
+    /* #616161; */
+}
+
+.TableList thead th i {
+    color: white
+}
+.TableList tbody tr i {
+    color: grey
+}
+
+button.btn {
+    background-color: #999999;
+    color: white;
+    font-weight: bold;
+}

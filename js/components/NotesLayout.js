@@ -4,13 +4,9 @@ export class NotesLayout {
         notes,
         editNoteComponents,
         removeNoteComponents,
-        archiveNoteComponents,
-        iconsStyle = `style="color: dimgrey;"`, 
-        headIconsStyle = `style="color: white;"`
+        archiveNoteComponents
     ) {
         this.notes = notes;
-        this.iconsStyle = iconsStyle;
-        this.headIconsStyle = headIconsStyle;
 
         this.editNoteModals = editNoteComponents
                 .map(component => component.getContent())
@@ -27,21 +23,21 @@ export class NotesLayout {
 
     getContent = () => {
         return `
-        <table class="table border-white table-hover">
-        <thead class="table-secondary">
+        <table class="table table-hover TableList">
+        <thead>
             <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Created</th>
-            <th scope="col">Category</th>
-            <th scope="col">Content</th>
-            <th scope="col">Dates</th>
-            <th scope="col"></th>
-            <th scope="col"><i class="bi bi-arrow-down-square-fill" ${this.headIconsStyle}></i></th>
-            <th scope="col"><i class="bi bi-trash-fill" ${this.headIconsStyle}></i></th>
+                <th scope="col"></th>
+                <th scope="col">Name</th>
+                <th scope="col">Created</th>
+                <th scope="col">Category</th>
+                <th scope="col">Content</th>
+                <th scope="col">Dates</th>
+                <th scope="col"></th>
+                <th scope="col"><i class="bi bi-arrow-down-square-fill"></i></th>
+                <th scope="col"><i class="bi bi-trash-fill"></i></th>
             </tr>
         </thead>
-        <tbody id="notesList" class="border-white">${this.getTbody()}</tbody>
+        <tbody id="notesList">${this.getTbody()}</tbody>
         </table>
         ${this.editNoteModals}
         ${this.removeNoteModals}
@@ -54,21 +50,22 @@ export class NotesLayout {
     }
 
     noteToRow = (note) => {
-        const tr = `<tr class="table-primary border-white" style="border-width:6px">
-            <th scope="row">Icon</th>
-            <td>${note.title}</td>
+        const icon = `<i class="bi ${note.category.iconName}"></i>`
+        const tr = `<tr>
+            <th scope="row">${icon}</th>
+            <th>${note.title}</th>
             <td>${note.created}</td>
             <td>${note.category.title}</td>
             <td>${note.content}</td>
             <td>dates</td>
             <td id="editNote_${note.id}" data-bs-toggle="modal" data-bs-target="#editNoteModal_${note.id}">
-                <i class="bi bi-pencil-fill" ${this.iconsStyle}></i>
+                <i class="bi bi-pencil-fill"></i>
             </td>
             <td data-bs-toggle="modal" data-bs-target="#archiveNoteModal_${note.id}">
-                <i class="bi bi-arrow-down-square-fill" ${this.iconsStyle}></i>
+                <i class="bi bi-arrow-down-square-fill"></i>
             </td>
             <td data-bs-toggle="modal" data-bs-target="#removeNoteModal_${note.id}">
-                <i class="bi bi-trash-fill" ${this.iconsStyle}></i>
+                <i class="bi bi-trash-fill"></i>
             </td>
         </tr>`;
 
