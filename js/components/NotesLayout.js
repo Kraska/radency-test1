@@ -52,7 +52,7 @@ export class NotesLayout {
     noteToRow = (note) => {
         const icon = `<i class="bi ${note.category.iconName}"></i>`
         const tr = `<tr>
-            <th scope="row">${icon}</th>
+            <th class="icon-coll">${icon}</th>
             <th>${note.title}</th>
             <td>${note.created}</td>
             <td>${note.category.title}</td>

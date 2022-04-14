@@ -28,8 +28,8 @@ export class SummaryLayout {
     categoryToRow = (category) => {
         const icon = `<i class="bi ${category.iconName}"></i>`
         const tr = `<tr>
-            <th scope="row">${icon}</th>
-            <td>${category.title}</td>
+            <th class="icon-coll">${icon}</th>
+            <th>${category.title}</th>
             <td>${category.activeCounter}</td>
             <td>${category.archivedCounter}</td>
         </tr>`;

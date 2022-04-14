@@ -13,7 +13,7 @@ class Storage {
         this.categories = {
             '1': new Category(1, 'Task', 'bi-card-list', 6, 0),
             '2': new Category(2, 'Random Thought', 'bi-shuffle', 1, 0), 
-            '3': new Category(3, 'Idea', 'bi-lightbulb', 0, 0) 
+            '3': new Category(3, 'Idea', 'bi-lightbulb', 1, 0) 
         }; 
 
         this.notes = {

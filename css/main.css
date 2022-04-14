@@ -25,12 +25,17 @@ div.container {
     /* #616161; */
 }
 
-.TableList thead th i {
-    color: white
+.TableList .icon-coll {
+    color: dimgray;
+    padding-left: 15px;
+    width: 50px;
 }
-.TableList tbody tr i {
+
+.TableList tbody td i {
     color: grey
 }
+
+
 
 button.btn {
     background-color: #999999;
