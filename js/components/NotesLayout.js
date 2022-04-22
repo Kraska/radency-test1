@@ -54,10 +54,10 @@ export class NotesLayout {
         const tr = `<tr>
             <th class="icon-coll">${icon}</th>
             <th>${note.title}</th>
-            <td>${note.created}</td>
+            <td>${note.createdStr()}</td>
             <td>${note.category.title}</td>
             <td>${note.content}</td>
-            <td>dates</td>
+            <td>${note.datesStr()}</td>
             <td id="editNote_${note.id}" data-bs-toggle="modal" data-bs-target="#editNoteModal_${note.id}">
                 <i class="bi bi-pencil-fill"></i>
             </td>

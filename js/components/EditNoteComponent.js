@@ -20,15 +20,26 @@ export class EditNoteComponent extends AbstractComponent {
                 titleId: `editNoteTitle_${note.id}`, 
                 contentId: `editNoteContent_${note.id}`, 
                 categoryId: `editNoteCategory_${note.id}`, 
+                dateId: `editNoteDate_${note.id}`, 
                 saveButtonId: `editNoteSaveButton_${note.id}`
             },
             CATEGORY_SERVICE.getCategories(),
             note
         );
+
+        this.selectedDate = note.date;
     }
 
     afterUpdate = () => {
+        datepicker(
+            `#${this.layout.dateId}`, 
+            { onSelect: this.onSelect, dateSelected: this.selectedDate }
+        );
         document.querySelector(`#${this.layout.saveButtonId}`).onclick = this.onSave;
+    }
+
+    onSelect = (instance) => {
+        this.selectedDate = instance.dateSelected;
     }
 
     getContent = () => {
@@ -38,11 +49,12 @@ export class EditNoteComponent extends AbstractComponent {
     onSave = () => {
 
         let title = document.querySelector(`#${this.layout.titleId}`).value;
-        let category = document.querySelector(`#${this.layout.categoryId}`).value;
+        let categoryId = document.querySelector(`#${this.layout.categoryId}`).value;
         let content = document.querySelector(`#${this.layout.contentId}`).value;
+        let date = this.selectedDate || null;
 
         bootstrap.Modal.getInstance(document.getElementById(this.modalId)).hide();
 
-        NOTE_SERVICE.updateNote(this.note.id, title, category, content);  
+        NOTE_SERVICE.updateNote(this.note.id, title, categoryId, content, date);  
     }
 }

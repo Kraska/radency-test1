@@ -16,22 +16,64 @@ class NoteService {
         return Object.values(STORE.notes).filter(note => note.isActive);
     }
 
-    addNewNote = (title, categoryId, content) => {
+    addNewNote = (title, categoryId, content, date) => {
 
         const id = this.newId();
         const category = CATEGORY_SERVICE.getCategory(categoryId);
-        STORE.notes[id] = new Note(id, title, category, content, '');
+        const dates = date ? [date] : [];
+
+        STORE.notes[id] = new Note(
+            id, 
+            title, 
+            category, 
+            content, 
+            new Date(), 
+            date, 
+            dates
+        );
         
-        EVENT_MANAGER.notify(EVENTS.NoteService.CREATED, { note: STORE.notes[id] });
+        EVENT_MANAGER.notify(
+            EVENTS.NoteService.CREATED, 
+            { note: STORE.notes[id] }
+        );
     }
 
-    updateNote = (id, title, categoryId, content) => {
-        //console.log('updateNote');
+    updateNote = (id, title, categoryId, content, date = null) => {
+        
         const oldNote = STORE.notes[id];
-        const category = CATEGORY_SERVICE.getCategory(categoryId);
-        STORE.notes[id] = new Note(id, title, category, content, '');
 
-        EVENT_MANAGER.notify(EVENTS.NoteService.UPDATED, { oldNote, newNote: STORE.notes[id] });
+        const category = CATEGORY_SERVICE.getCategory(categoryId);
+
+        const dates = [...oldNote.dates];
+        if (!this.isDatesEqual(date, oldNote.date)) {
+            dates.push(date);
+        }
+
+        STORE.notes[id] = new Note(
+            id, 
+            title, 
+            category, 
+            content, 
+            oldNote.created, 
+            date, 
+            dates, 
+            oldNote.isActive
+        );
+
+        EVENT_MANAGER.notify(
+            EVENTS.NoteService.UPDATED, 
+            { oldNote, newNote: STORE.notes[id] }
+        );
+    }
+
+    isDatesEqual = (date1, date2) => {
+        if (date1 === null)
+            return date2 === null ? true : false;
+
+        if (date2 === null)
+            return false;
+
+        return date1.toString() === date2.toString();    
     }
 
     removeNote = (id) => {

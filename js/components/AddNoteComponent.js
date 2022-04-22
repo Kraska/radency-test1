@@ -18,6 +18,7 @@ export class AddNoteComponent extends AbstractComponent {
                 titleId: 'addNoteTitle', 
                 contentId: 'addNoteContent', 
                 categoryId: 'addNoteCategory', 
+                dateId: 'addNoteDate', 
                 saveButtonId: 'addNoteSaveButton'
             },
             CATEGORY_SERVICE.getCategories()
@@ -25,7 +26,12 @@ export class AddNoteComponent extends AbstractComponent {
     }
 
     afterUpdate = () => {
+        datepicker(`#${this.layout.dateId}`, { onSelect: this.onSelect });
         document.querySelector(`#${this.layout.saveButtonId}`).onclick = this.onSave;
+    }
+
+    onSelect = (instance) => {
+        this.selectedDate = instance.dateSelected;
     }
 
     getContent = () => {
@@ -37,18 +43,19 @@ export class AddNoteComponent extends AbstractComponent {
                     class="btn float-end" 
                     data-bs-toggle="modal" 
                     data-bs-target="#${this.layout.id}">
-                        Create Note3
+                        Create Note
                 </button>
             </div>`;
     }
 
     onSave = () => {
         let title = document.querySelector(`#${this.layout.titleId}`).value;
-        let category = document.querySelector(`#${this.layout.categoryId}`).value;
+        let categoryId = document.querySelector(`#${this.layout.categoryId}`).value;
         let content = document.querySelector(`#${this.layout.contentId}`).value;
-        
+        let date = this.selectedDate || null;
+
         bootstrap.Modal.getInstance(document.getElementById(this.modalId)).hide();
 
-        NOTE_SERVICE.addNewNote(title, category, content);  
+        NOTE_SERVICE.addNewNote(title, categoryId, content, date);  
     }
 }

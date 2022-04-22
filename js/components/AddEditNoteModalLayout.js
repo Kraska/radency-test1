@@ -5,7 +5,7 @@ export class AddEditNoteModalLayout extends AbstractModalLayout {
     constructor(
             id,
             title,
-            { titleId, contentId, categoryId, saveButtonId }, 
+            { titleId, contentId, categoryId, dateId, saveButtonId }, 
             categories, 
             note = { title: '', category: { id: '', title: ''}, content: '' }
         ) {
@@ -17,6 +17,7 @@ export class AddEditNoteModalLayout extends AbstractModalLayout {
         this.titleId = titleId;
         this.contentId = contentId;
         this.categoryId = categoryId;
+        this.dateId = dateId;
         this.saveButtonId = saveButtonId;
         this.note = note;
     }
@@ -44,6 +45,10 @@ export class AddEditNoteModalLayout extends AbstractModalLayout {
             <div class="mb-3">
                 <label for="${this.contentId}" class="form-label">Content</label>
                 <textarea class="form-control" id="${this.contentId}" rows="3">${this.note.content}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="${this.dateId}" class="form-label">Date</label>
+                <input type="text" id="${this.dateId}">
             </div>`;
     }
 
